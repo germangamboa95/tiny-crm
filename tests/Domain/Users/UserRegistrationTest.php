@@ -8,15 +8,17 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class UserRegistration extends TestCase
+class UserRegistrationTests extends TestCase
 {
 
     use WithFaker;
+    use RefreshDatabase;
 
     /**
      * A basic feature test example.
      *
      * @return void
+     * @test 
      */
     public function it_can_register_a_new_user()
     {
@@ -33,7 +35,6 @@ class UserRegistration extends TestCase
 
         $userDTO = UserDTO::fromArray($user);
 
-        dd($userDTO);
 
         $registerNewUser->execute($userDTO);
     }
