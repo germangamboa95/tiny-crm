@@ -2,8 +2,11 @@
 
 namespace Support\Helpers;
 
-abstract class DTOBase
+use Illuminate\Contracts\Support\Arrayable;
+
+abstract class DTOBase implements Arrayable
 {
+
 
     public static function fromArray(array $arr)
     {
@@ -28,5 +31,16 @@ abstract class DTOBase
     protected function getProps(): array
     {
         return get_class_vars(get_class($this));
+    }
+
+    public function toArray(): array
+    {
+        $props =  $this->getProps();
+        $arr = [];
+        foreach ($props as $key => $prop) {
+            $arr[$key] = $this->$key;
+        }
+
+        return $arr;
     }
 }

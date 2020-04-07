@@ -39,4 +39,34 @@ class UserDTOTest extends TestCase
             $this->assertEquals($value, $userDTO->$key);
         }
     }
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     * @test
+     */
+    public function it_can_be_made_into_an_array()
+    {
+
+        $user = [
+            'firstName' => $this->faker()->firstName(),
+            'lastName' => $this->faker()->lastName(),
+            'email' => $this->faker()->email,
+            'password' => $this->faker()->password()
+
+        ];
+
+
+        $userDTO = UserDTO::fromArray($user);
+
+        $arr = $userDTO->toArray();
+
+
+
+        $this->assertNotNull($arr);
+        $this->assertIsArray($arr);
+
+        $this->assertEquals($user, $arr);
+    }
 }
